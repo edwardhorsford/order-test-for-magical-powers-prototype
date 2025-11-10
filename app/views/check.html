@@ -1,0 +1,69 @@
+{% extends "layout.html" %}
+
+{% from 'button/macro.njk' import button %}
+{% from 'summary-list/macro.njk' import summaryList %}
+
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <h1 class="nhsuk-heading-l">Check your answers before ordering the test</h1>
+
+      {{ summaryList({
+        rows: [
+          {
+            key: {
+              text: "Do you have symptoms?"
+            },
+            value: {
+              text: data.hasSymptoms
+            },
+            actions: {
+              items: [
+                {
+                  href: "/magical-powers",
+                  text: "Change",
+                  visuallyHiddenText: "NHS number"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Details of symptoms"
+            },
+            value: {
+              text: data.symptoms
+            },
+            actions: {
+              items: [
+                {
+                  href: "/symptoms",
+                  text: "Change",
+                  visuallyHiddenText: "name"
+                }
+              ]
+            }
+          }
+        ]
+      }) }}
+
+    
+      <h2 class="nhsuk-heading-m">
+        Now send your application
+      </h2>
+
+      <p>
+        Your details will be sent the NHS magical powers department.
+      </p>
+
+      <form action="/done" method="post" novalidate>
+        {{ button({
+          text: "Confirm and send"
+        }) }}
+      </form>
+
+    </div>
+  </div>
+{% endblock %}
